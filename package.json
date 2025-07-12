@@ -1,0 +1,40 @@
+{
+  "name": "odoo",
+  "version": "1.0.0",
+  "description": "Odoo Hackathon",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": " nodemon node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shubhamt43/odooHackathon.git"
+  },
+  "keywords": [
+    "odoo",
+    "hackathon",
+    "RESTfulAPI",
+    "backend",
+    "nodejs"
+  ],
+  "author": "Priya Yadav",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shubhamt43/odooHackathon/issues"
+  },
+  "homepage": "https://github.com/shubhamt43/odooHackathon#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "connect-flash": "^0.1.1",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.1",
+    "mongoose": "^8.16.3",
+    "multer": "^2.0.1",
+    "nodemon": "^3.1.10",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7"
+  }
+}
