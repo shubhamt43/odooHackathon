@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= profileUser.name %> | Profile</title>
+  <style>
+    body {
+      font-family:  sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 0;
+      color: #000000;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #4f46e5;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .navbar .brand {
+      font-weight: bold;
+      font-size: 22px;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 500;
+    }
+
+    .navbar .right {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar img.nav-profile-pic {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      margin-left: 15px;
+      object-fit: cover;
+      border: 2px solid white;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-header {
+      text-align: center;
+    }
+
+    .profile-pic {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #636e72;
+      margin-bottom: 15px;
+    }
+
+    .profile-header h1 {
+      margin: 10px 0 5px;
+      font-size: 28px;
+      color: #2c3e50;
+    }
+
+    .info-section {
+      margin-top: 20px;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .info-section p {
+      margin: 6px 0;
+    }
+
+    h2 {
+      margin-top: 40px;
+      color: #4f46e5;
+    }
+
+    .review {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      border-bottom: 1px solid #dfe6e9;
+      padding: 15px 0;
+    }
+
+    .review img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .review-content {
+      flex: 1;
+    }
+
+    .review-content strong {
+      font-size: 16px;
+      color: #2d3436;
+    }
+
+    .review-content small {
+      color: #636e72;
+      display: block;
+      margin-top: 2px;
+    }
+
+    .review-content p {
+      margin: 8px 0;
+    }
+
+    .stars {
+      color: #f1c40f;
+      margin-top: 5px;
+      font-size: 18px;
+    }
+
+    .no-reviews {
+      color: #b2bec3;
+      font-style: italic;
+      padding: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="brand">SkillSwap</div>
+    <div class="right">
+      <a href="/">Home</a>
+      <% if (user) { %>
+        <a href="/dashboard">
+          <img src="<%= user.profilePhoto || '/uploads/default.png' %>" class="nav-profile-pic" alt="Profile">
+        </a>
+      <% } else { %>
+        <a href="/login">Login</a>
+        <a href="/register">Sign Up</a>
+      <% } %>
+    </div>
+  </div>
+
+  <!-- Profile Section -->
+  <div class="container">
+    <div class="profile-header">
+      <img class="profile-pic" src="<%= profileUser.profilePhoto %>" alt="Profile Photo">
+      <h1><%= profileUser.name %></h1>
+    </div>
+
+    <div class="info-section">
+      <p><strong>Email:</strong> <%= profileUser.email %></p>
+      <p><strong>Skills Offered:</strong> <%= profileUser.skillsOffered.join(', ') %></p>
+      <p><strong>Skills Wanted:</strong> <%= profileUser.skillsWanted.join(', ') %></p>
+      <p><strong>Availability:</strong> <%= profileUser.availability %></p>
+    </div>
+
+    <h2>Reviews:</h2>
+
+   <% if (Array.isArray(reviews) && reviews.length > 0) { %>
+  <% reviews.forEach(function(r) { %>
+    <div class="review">
+      <img src="<%= r.reviewer?.profilePhoto || '/uploads/default.png' %>" alt="Reviewer Photo">
+      <div class="review-content">
+        <strong><%= r.reviewer?.name || r.reviewer?.email || 'Unknown' %></strong>
+        <small><%= new Date(r.createdAt).toLocaleDateString() %></small>
+        <p><%= r.content %></p>
+        <div class="stars">
+          <% for (let i = 0; i < r.rating; i++) { %>⭐<% } %>
+        </div>
+      </div>
+    </div>
+  <% }); %>
+<% } else { %>
+  <p class="no-reviews">No reviews yet.</p>
+<% } %>
+
+  </div>
+
+  <!-- Footer -->
+<footer style="background-color: #4f46e5; color: white; text-align: center; padding: 20px 0; margin-top: 40px;">
+  <p>&copy; <%= new Date().getFullYear() %> SkillSwap. All rights reserved.</p>
+  <p style="font-size: 14px;">Built for learning and connecting talents worldwide.</p>
+</footer>
+
+</body>
+</html>
+
+
