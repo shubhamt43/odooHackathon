@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Send Request</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 60px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      color: #ffffff;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2d3436;
+    }
+
+    h3 {
+      color: #0984e3;
+      margin-top: 25px;
+    }
+
+    p {
+      color: #555;
+      margin-top: 5px;
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #6c5ce7;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      resize: vertical;
+      color: #2d3436;
+    }
+
+    button {
+      margin-top: 20px;
+      background-color: #00b894;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #019875;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #6c5ce7;
+      font-size: 0.95rem;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Send Request to <%= recipient.name %></h1>
+
+    <h3>Your Skills Offered:</h3>
+    <p><%= user.skillsOffered ? user.skillsOffered.join(', ') : 'None' %></p>
+
+    <h3>Your Skills Wanted:</h3>
+    <p><%= user.skillsWanted ? user.skillsWanted.join(', ') : 'None' %></p>
+
+    <form action="/request/<%= recipient._id %>" method="POST">
+      <label for="message">Your Message:</label>
+      <textarea name="message" id="message" rows="5" placeholder="Write your request..." required></textarea>
+      <button type="submit">Send Request</button>
+    </form>
+  </div>
+
+  <footer style="background-color: #4f46e5; color: white; text-align: center; padding: 20px 0; margin-top: 40px;">
+  <p>&copy; <%= new Date().getFullYear() %> SkillSwap. All rights reserved.</p>
+  <p style="font-size: 14px;">Built for learning and connecting talents worldwide.</p>
+</footer>
+
+</body>
+</html>
+
+
